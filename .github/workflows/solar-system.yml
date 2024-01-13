@@ -22,7 +22,7 @@ jobs:
         exclude:
           - nodejs_version: 18
             operating_system: macos-latest
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.operating_system }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -30,7 +30,7 @@ jobs:
       - name: Setup NodeJS Version - ${{ matrix.nodejs_version }}
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: ${{ matrix.nodejs_version }}
 
       - name: Install Dependencies
         run: npm install
@@ -41,5 +41,5 @@ jobs:
       - name: Archive Test Result
         uses: actions/upload-artifact@v4
         with:
-          name: Mocha Test-Result - ${{ matrix.operating_system}}-${{ matrix.nodejs_version}}
+          name: Mocha Test-Result-${{ matrix.operating_system}}-${{ matrix.nodejs_version}}
           path: test-results.xml
