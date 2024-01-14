@@ -23,7 +23,7 @@ jobs:
     env:
       MONGO_URI: 'mongodb://localhost:27017/superData'
       MONGO_USERNAME: non-prod-user
-      MONGO_PASSWORD: non-prod-password
+      MONGO_PASSWORD: ${{ secrets.MONGO_TEST_PASSWORD }}
     strategy:
       matrix:
         operating_system: [ubuntu-latest]
