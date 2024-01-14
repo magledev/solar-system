@@ -21,7 +21,7 @@ jobs:
         ports: 
           - 27017:27017
     env:
-      MONGO_TEST_URI: 'mongodb//localhost:27017/superdata'
+      MONGO_TEST_URI: 'mongodb://localhost:27017/superdata'
       MONGO_TEST_USERNAME: ${{ vars.MONGO_TEST_USERNAME }}
       MONGO_TEST_PASSWORD: ${{ secrets.MONGO_TEST_PASSWORD }}
     strategy:
