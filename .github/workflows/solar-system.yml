@@ -72,11 +72,11 @@ jobs:
       image: node:18
     services:
       mongo-db:
-        image: siddharth67/mongo-db:non-prod
+        image: magleman/mongo-db:non-prod
         options:
           --name mongo
     env:
-      MONGO_URI: 'mongodb://mongo:27017/superData'
+      MONGO_URI: ${{ vars.MONGO_TEST_URI }}
       MONGO_USERNAME: ${{ secrets.MONGO_TEST_USERNAME }}
       MONGO_PASSWORD: ${{ secrets.MONGO_TEST_PASSWORD }}
     steps:
