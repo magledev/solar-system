@@ -166,9 +166,20 @@ jobs:
   dev-deploy:
     needs: docker
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
+
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials for London region
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          audience: sts.amazonaws.com
+          aws-region: eu-west-2
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
 
       - name: Install Kubectl CLI
         uses: azure/setup-kubectl@v3
@@ -192,13 +203,6 @@ jobs:
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
-
-      - name: Configure AWS Credentials for London region
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          audience: sts.amazonaws.com
-          aws-region: eu-west-2
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
 
       - name: Fecth Kubernetes Cluster Details
         run: |
