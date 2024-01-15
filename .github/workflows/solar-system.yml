@@ -186,3 +186,22 @@ jobs:
           kubectl version
           echo ------------------------------
           kubectl get nodes
+
+      - name: Set Kubernetes Context
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+
+      - name: Configure AWS Credentials for London region
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          audience: sts.amazonaws.com
+          aws-region: eu-west-2
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+
+      - name: Fecth Kubernetes Cluster Details
+        run: |
+          kubectl version
+          echo ---------------------------------
+          kubectl get nodes-
