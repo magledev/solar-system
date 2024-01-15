@@ -192,20 +192,8 @@ jobs:
          method: kubeconfig
          kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - name: Fecth Kubernetes Cluster Details
+      - name: Fetch Kubernetes Cluster Details
         run: |
           kubectl version
           echo ------------------------------
           kubectl get nodes
-
-      - name: Set Kubernetes Context
-        uses: azure/k8s-set-context@v3
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBECONFIG }}
-
-      - name: Fecth Kubernetes Cluster Details
-        run: |
-          kubectl version
-          echo -----------------------------------
-          kubectl get nodes-
